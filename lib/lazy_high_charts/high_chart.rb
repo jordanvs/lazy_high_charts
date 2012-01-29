@@ -57,6 +57,13 @@ module LazyHighCharts
         @data << opts.merge(:name => opts[:name], :data => opts[:data])
       end
     end
+    
+     def self.from_json(jstr)
+       obj = new
+       options = JSON.parse(jstr) if jstr.class == String
+       options.each_pair { |key,value| obj.send("#{key}=", value) }
+       obj
+     end
 
 private
 
